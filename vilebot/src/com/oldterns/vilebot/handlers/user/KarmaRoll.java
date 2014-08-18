@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.oldterns.vilebot.db.KarmaDB;
+import com.oldterns.vilebot.handlers.admin.Pranker;
 import com.oldterns.vilebot.util.BaseNick;
 
 import net.engio.mbassy.listener.Handler;
@@ -104,7 +105,9 @@ public class KarmaRoll
                             int secondRoll = result.getSecondPlayerRoll();
 
                             String winner = result.getWinnerNick();
+                            winner = Pranker.prankee(winner);
                             String loser = result.getLoserNick();
+                            loser = Pranker.prankee(loser);
                             int deltaKarma = currentGame.getWager();
 
                             StringBuilder sb = new StringBuilder();

@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import com.oldterns.vilebot.db.QuoteFactDB;
+import com.oldterns.vilebot.handlers.admin.Pranker;
 import com.oldterns.vilebot.util.BaseNick;
 import com.oldterns.vilebot.util.Ignore;
 
@@ -77,6 +78,7 @@ public class QuotesAndFacts
 
             if ( "fact".equals( mode ) )
             {
+                noun =  Pranker.prankee( noun );
                 if ( !replyWithFact( noun, event ) )
                 {
                     event.reply( noun + " has no facts." );
@@ -84,6 +86,7 @@ public class QuotesAndFacts
             }
             else
             {
+                noun =  Pranker.prankee( noun );
                 if ( !replyWithQuote( noun, event ) )
                 {
                     event.reply( noun + " has no quotes." );
@@ -190,11 +193,13 @@ public class QuotesAndFacts
         {
             if ( random.nextBoolean() )
             {
+                baseNick =  Pranker.prankee( baseNick );
                 if ( !replyWithQuote( baseNick, event ) )
                     replyWithFact( baseNick, event );
             }
             else
             {
+                baseNick =  Pranker.prankee( baseNick );
                 if ( !replyWithFact( baseNick, event ) )
                     replyWithQuote( baseNick, event );
             }

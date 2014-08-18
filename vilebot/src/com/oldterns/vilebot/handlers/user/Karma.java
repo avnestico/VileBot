@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.oldterns.vilebot.db.KarmaDB;
+import com.oldterns.vilebot.handlers.admin.Pranker;
 import com.oldterns.vilebot.util.BaseNick;
 import com.oldterns.vilebot.util.Ignore;
 
@@ -87,6 +88,7 @@ public class Karma
 
             for ( String nick : nicks )
             {
+                nick = Pranker.prankee(nick);
                 if ( !nick.equals( sender ) )
                     KarmaDB.modNounKarma( nick, 1 );
                 else
@@ -121,6 +123,7 @@ public class Karma
 
             for ( String nick : nicks )
             {
+                nick = Pranker.prankee(nick);
                 if ( !nick.equals( bot.getNick() ) )
                     KarmaDB.modNounKarma( nick, -1 );
                 else
@@ -164,6 +167,7 @@ public class Karma
             String mode = selfMatcher.group( 1 );
             String noun = BaseNick.toBaseNick( event.getSender() );
 
+            noun =  Pranker.prankee( noun );
             boolean reverse = "rev".equals( mode );
             if ( !replyWithRankAndKarma( noun, event, reverse ) )
                 event.reply( noun + " has no karma." );
@@ -274,6 +278,7 @@ public class Karma
         {
             StringBuilder sb = new StringBuilder();
 
+            noun =  Pranker.prankee( noun );
             sb.append( noun );
             if ( obfuscateNick )
                 sb.reverse();
